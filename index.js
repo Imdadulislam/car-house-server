@@ -54,10 +54,10 @@ async function run() {
         });
 
         // My perchase
-        app.get('/perchase', async (req, res) => {
-            const result = await perchaseCollection.find({ email: req.query.email }).toArray();
+        app.get('/perchase/:email', async (req, res) => {
+            const result = await perchaseCollection.find({ email: req.params.email }).toArray();
             console.log(result);
-            res.json(result);
+            res.send(result);
         })
 
         // post perchase
