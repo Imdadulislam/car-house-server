@@ -61,7 +61,7 @@ async function run() {
         })
 
         // Get info for mayment
-        app.get('/perchase/id:', async (req, res) => {
+        app.get('/perchase/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await perchaseCollection.findOne(query);
