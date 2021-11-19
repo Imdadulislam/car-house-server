@@ -60,6 +60,13 @@ async function run() {
             res.send(result);
         })
 
+        // Get info for mayment
+        app.get('/perchase/id:', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await perchaseCollection.findOne(query);
+            res.json(result);
+        })
         // post perchase
         app.post('/perchase', async (req, res) => {
             const perchase = req.body;
