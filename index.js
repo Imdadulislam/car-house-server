@@ -41,6 +41,7 @@ async function run() {
         // Get single product
         app.get('/cars/:id', async (req, res) => {
             const id = req.params.id;
+            console.log(id);
             const query = { _id: ObjectId(id) };
             const car = await CarCollection.findOne(query);
             res.json(car);
@@ -80,7 +81,6 @@ async function run() {
             console.log('updating user', req);
             const filter = { _id: ObjectId(id) };
             const result = await perchaseCollection.updateOne(filter, { $set: { status: updateStatus }, });
-            console.log(result);
             res.send(result);
 
         })
@@ -127,7 +127,6 @@ async function run() {
             console.log(req.body);
             const result = await usersCollection.insertOne(req.body);
             res.json(result);
-            console.log(result);
         });
         // Google User info post to database
         app.put('/userinfo', async (req, res) => {
