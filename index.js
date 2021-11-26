@@ -41,7 +41,6 @@ async function run() {
         // Get single product
         app.get('/cars/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id);
             const query = { _id: ObjectId(id) };
             const car = await CarCollection.findOne(query);
             res.json(car);
@@ -57,12 +56,12 @@ async function run() {
         // My perchase
         app.get('/perchase/:email', async (req, res) => {
             const result = await perchaseCollection.find({ email: req.params.email }).toArray();
-            console.log(result);
             res.send(result);
         })
 
-        // Get info for mayment
+        // Get info for Payment
         app.get('/perchase/:id', async (req, res) => {
+            console.log(req.params.id);
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await perchaseCollection.findOne(query);
@@ -78,7 +77,6 @@ async function run() {
         app.put('/updateStatus/:id', async (req, res) => {
             const id = req.params.id;
             const updateStatus = req.body.status;
-            console.log('updating user', req);
             const filter = { _id: ObjectId(id) };
             const result = await perchaseCollection.updateOne(filter, { $set: { status: updateStatus }, });
             res.send(result);
@@ -124,7 +122,6 @@ async function run() {
 
         // Userinfo post to database
         app.post('/userinfo', async (req, res) => {
-            console.log(req.body);
             const result = await usersCollection.insertOne(req.body);
             res.json(result);
         });
@@ -141,7 +138,6 @@ async function run() {
         // 
         app.put('/userinfo/admin', async (req, res) => {
             const user = req.body;
-            console.log('put', req.decoderUser);
             const filter = { email: user.email };
             const updateDoc = { $set: { role: 'admin' } };
             const result = await usersCollection.updateOne(filter, updateDoc);
