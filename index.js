@@ -54,15 +54,23 @@ async function run() {
         });
 
         // My perchase
-        app.get('/perchase/:email', async (req, res) => {
-            const result = await perchaseCollection.find({ email: req.params.email }).toArray();
+        app.get('/perchase', async (req, res) => {
+            const result = await perchaseCollection.find({ email: req.query.email }).toArray();
             res.send(result);
-        })
+        });
 
         // Get info for Payment
+        // app.get('/perchase/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     console.log(id);
+        //     const query = { _id: ObjectId(id) };
+        //     console.log(query);
+        //     const result = await perchaseCollection.findOne(query);
+        //     res.json(result);
+        // });
         app.get('/perchase/:id', async (req, res) => {
-            console.log(req.params.id);
             const id = req.params.id;
+            console.log(id);
             const query = { _id: ObjectId(id) };
             const result = await perchaseCollection.findOne(query);
             res.json(result);
