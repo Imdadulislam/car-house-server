@@ -47,15 +47,17 @@ async function run() {
         });
 
         // All Perchase
-        app.get('/perchase', async (req, res) => {
+        app.get("/perchase/all", async (req, res) => {
             const cursor = perchaseCollection.find({});
             const perchase = await cursor.toArray();
             res.send(perchase);
         });
 
         // My perchase
-        app.get('/perchase', async (req, res) => {
-            const result = await perchaseCollection.find({ email: req.query.email }).toArray();
+        app.get("/perchase/mine", async (req, res) => {
+            const result = await perchaseCollection
+                .find({ email: req.query.email })
+                .toArray();
             res.send(result);
         });
 
